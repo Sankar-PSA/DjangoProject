@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <form action="">
+
+        <table>
+
+            <tr>
+                <td>User Name</td>
+                <td><input type="text" id="UserName_id" name="userid"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" id="Password_id" name="pwd"></td>
+            </tr>
+
+        </table>
+         <br>
+            <button id="Loginid" >Login</button>
+
+    </form>
+
+    <script>
+        document.getElementById("Loginid").addEventListener("click", function(event) {
+            event.preventDefault();
+            const userName = document.getElementById("UserName_id").value;
+            const password = document.getElementById("Password_id").value;
+
+            let PARAMS = {
+                "userName": userName,
+                "Password": password
+            };
+
+            const url = 'http://127.0.0.1:8000/';
+            fetch(url + "RegLogin", {
+                method: 'POST',
+                body: JSON.stringify(PARAMS)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("API Response:", data);
+            });
+        });
+
+
+    </script>
+</body>
+</html>

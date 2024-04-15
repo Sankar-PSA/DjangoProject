@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignupForm</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="" name="myForm" onsubmit="validateForm(); return false;">
+        <table >
+            <tr>
+                <td >First Name </td>
+                <td ><input type="text" id="FirstNameid" name="fname" required ></td>
+            </tr>
+            <tr>
+                <td >Last Name</td>
+                <td ><input type="text" id="LasttNameid" name="lname" required ></td>
+            </tr>
+
+            <tr>
+                <td >User Name</td>
+                <td ><input type="text"  id="UserName_id" name="userid" required ></td>
+            </tr>
+            <tr>
+                <td >Password</td>
+                <td ><input type="text" id="Password_id" name="pwd" required ></td>
+            </tr>
+            <tr>
+                <td >Mobile Number</td>
+                <td ><input type="text" id="MobileNumber_id" name="mob" required ></td>
+            </tr>
+            <tr>
+                <td >Email</td>
+                <td ><input type="text" id="Email_id" name="email" required ></td>
+            </tr>
+
+        </table>
+        <br>
+        <button id="Register">Register</button>
+        &nbsp; &nbsp;
+        <button id="clear_id" onclick="Clear()">Cancel</button>
+
+    </form>
+    <script>
+        function validateForm() {
+            const firstName = document.forms["myForm"]["fname"].value;
+            const lastName = document.forms["myForm"]["lname"].value;
+            const userName = document.forms["myForm"]["userid"].value;
+            const Password = document.forms["myForm"]["pwd"].value;
+            const mobile = document.forms["myForm"]["mob"].value;
+            const email = document.forms["myForm"]["email"].value;
+
+
+            let PARAMS = {
+                "firstname": firstName,
+                "lastname": lastName,
+                "userid": userName,
+                "password": Password,
+                "mblenum": mobile,
+                "email": email
+            };
+
+            const url = 'http://127.0.0.1:8000/';
+            fetch(url + "Register", {
+                method: 'POST',
+                body: JSON.stringify(PARAMS)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("API Response:", data);
+            });
+        }
+
+        function Clear() {
+            document.getElementById("FirstNameid").value = "";
+            document.getElementById("LasttNameid").value = "";
+            document.getElementById("UserName_id").value = "";
+            document.getElementById("Password_id").value = "";
+            document.getElementById("Email_id").value = "";
+            document.getElementById("MobileNumber_id").value = "";
+        }
+    </script>
+</body>
+</html>
